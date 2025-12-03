@@ -85,6 +85,7 @@ src/main/java/com/ms/email/
 - **Messaging** (`messaging/`): Consumers de filas, event listeners
 - **CLI** (`cli/`): Command line interfaces
 - **Responsabilidade**: Recebem requisições externas e chamam use cases
+- **Fluxo**: Mundo Externo → Adaptador IN → Use Case → Domain
 
 **Adaptadores de Saída** (`adapter/out/`):
 - **Persistence** (`persistence/`): Implementações JPA, MongoDB, etc
@@ -92,6 +93,7 @@ src/main/java/com/ms/email/
 - **HTTP** (`http/`): Clientes para APIs externas
 - **File** (`file/`): Manipulação de arquivos
 - **Responsabilidade**: Implementam as portas de saída do domínio
+- **Fluxo**: Domain → Use Case → Porta OUT → Adaptador OUT → Mundo Externo
 
 **Configurações** (`config/`):
 - Beans do Spring
@@ -104,6 +106,28 @@ src/main/java/com/ms/email/
 - ✅ Contém todas as dependências de frameworks
 - ✅ Implementa as interfaces (portas) definidas no domínio
 - ✅ Faz conversões entre formatos externos e domínio (DTOs ↔ Entities)
+
+## Diferença entre IN e OUT
+
+### 🔵 **IN (Entrada)** - Quem CHAMA o domínio
+- **Controllers**: Recebem HTTP requests
+- **Consumers**: Recebem mensagens de filas
+- **Schedulers**: Executam tarefas agendadas
+- **CLI**: Comandos de linha
+
+**Fluxo**: `Mundo Externo → Adaptador IN → Use Case → Domain`
+
+### 🔴 **OUT (Saída)** - Quem o domínio CHAMA
+- **Repositories**: Persistência de dados
+- **Email Senders**: Envio de emails
+- **HTTP Clients**: Chamadas para APIs externas
+- **File Systems**: Manipulação de arquivos
+
+**Fluxo**: `Domain → Use Case → Porta OUT → Adaptador OUT → Mundo Externo`
+
+### 💡 **Dica para lembrar**:
+- **IN**: "Quem está **entrando** na aplicação?"
+- **OUT**: "Para onde a aplicação está **saindo**?"
 
 ## Fluxo de Dependências
 
