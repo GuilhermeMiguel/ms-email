@@ -1,4 +1,4 @@
-package com.ms.email.configs;
+package com.ms.email.infraestructure.config;
 
 
 import org.springframework.amqp.core.Queue;

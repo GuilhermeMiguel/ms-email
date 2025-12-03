@@ -1,9 +1,13 @@
-package com.ms.email.models;
+package com.ms.email.infraestructure.adapter.persistence.entity;
 
-import com.ms.email.enums.StatusEmail;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -11,7 +15,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "TB_EMAIL")
-public class EmailModel implements Serializable {
+public class EmailEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -24,5 +28,5 @@ public class EmailModel implements Serializable {
     @Column(columnDefinition = "TEXT")
     private String text;
     private LocalDateTime sendDateEmail;
-    private StatusEmail statusEmail;
+    private String statusEmail;
 }
